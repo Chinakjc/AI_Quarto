@@ -4,4 +4,8 @@ import Database.Data;
 
 public class NewAI {
     private Data data;
+
+    public NewAI(Data data){
+        this.data = new Data(data);
+    }
 }
