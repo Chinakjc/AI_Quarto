@@ -8,4 +8,10 @@ public class NewAI {
     public NewAI(Data data){
         this.data = new Data(data);
     }
+
+    private int getScore(){
+        return data.getScore();
+    }
+
+
 }

@@ -254,4 +254,8 @@ public class Data {
 
         return res;
     }
+
+    public int getScore(){
+        return 0;
+    }
 }
