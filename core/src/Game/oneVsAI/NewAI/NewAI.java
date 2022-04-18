@@ -28,6 +28,11 @@ public class NewAI {
         data.unPut(pos);
     }
 
+
+    private void select(int p){
+        data.select(p);
+    }
+
     private void unSelect(int p){
         data.unSelect(p);
     }
@@ -56,7 +61,7 @@ public class NewAI {
                     score = getScore();
                 }else{
                     int s = getScore();
-                    if(s>score){
+                    if(s>score){ //MAX
                         res = pos;
                         score = s;
                     }
@@ -79,8 +84,29 @@ public class NewAI {
     }
 
     private int getPiece(){
-        //todo
-        return 0;
+        ArrayList<Integer> options = getPiecesDisponibles();
+        if(depth<=0){
+            return options.get(0);
+        }
+        int score = 0;
+        Integer res = null;
+        for (Integer p:options
+             ) {
+            select(p);
+            Coordinate pos = getPostion(p);
+            put(p,pos);
+            if(res == null){
+                res = p;
+                score = getScore();
+            }else{
+                int s = getScore();
+                if(s<score){  //MIN
+                    score = s;
+                    res = p;
+                }
+            }
+        }
+        return res;
     }
 
     public Combination AI(){
