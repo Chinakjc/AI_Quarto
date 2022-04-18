@@ -1,6 +1,9 @@
 package Database;
 
 import Game.main.Piece;
+import Game.oneVsAI.Coordinate;
+
+import java.util.ArrayList;
 
 /**
  * La classe sert à enregistrer toutes les donnees liees a l'avancement d'une partie
@@ -549,5 +552,42 @@ public class Data {
         res += getScoreDiagSup();
 
         return res;
+    }
+
+    public ArrayList<Coordinate> getPostionsDisponibles(){
+        ArrayList<Coordinate> res = new ArrayList<>();
+        for(int line = 0; line < 4; line ++){
+            for(int col = 0; col < 4; col ++){
+                if(indice_piece_sur_case_de_plateau[line][col]!=-1){
+                    Coordinate pos = new Coordinate(line,col);
+                    res.add(pos);
+                }
+            }
+        }
+        return res;
+    }
+
+    public ArrayList<Integer> getPiecesDisponibles(){
+        ArrayList<Integer> res = new ArrayList<>();
+        for(int i = 0; i< 16; i++){
+            if(piece[i].est_disponible==1)
+                res.add(i);
+        }
+        return res;
+    }
+
+    public void select(int p){
+        piece[p].select();
+    }
+    public void put(int p, Coordinate pos){
+        indice_piece_sur_case_de_plateau[pos.getX()][pos.getY()] = p;
+    }
+
+    public void unPut(Coordinate pos){
+        indice_piece_sur_case_de_plateau[pos.getX()][pos.getY()] = -1;
+    }
+
+    public void unSelect(int p){
+        piece[p].est_disponible = 1;
     }
 }
