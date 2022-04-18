@@ -13,6 +13,8 @@ public class Data {
     public int compteur;
     public String[] liste_joueur;
 
+    private final int MAXSCORE = 10000;
+
     public Data(int mode){
         this.mode = mode;
         piece = new Piece[16];
@@ -255,8 +257,297 @@ public class Data {
         return res;
     }
 
+    private int getScoreLine(int line){
+        int k_blanc = 1;
+        int k_noir = 1;
+        int k_rond = 1;
+        int k_carre = 1;
+        int k_grand =1;
+        int k_petit = 1;
+        int k_plein = 1;
+        int k_creus = 1;
+
+        int s_blanc = 0;
+        int s_noir = 0;
+        int s_rond = 0;
+        int s_carre = 0;
+        int s_grand = 0;
+        int s_petit = 0;
+        int s_plein = 0;
+        int s_creus = 0;
+
+        for(int col = 0; col < 4; col ++){
+            int indexP = indice_piece_sur_case_de_plateau[line][col];
+            if(indexP == -1)
+                continue;
+            Piece p = piece[indexP];
+            //blanc ou noir
+            if(p.est_blanche == 1){
+                s_blanc++;
+                k_noir = 0;
+            }else {
+                s_noir++;
+                k_blanc =0;
+            }
+            //rond ou carre
+            if(p.est_ronde == 1){
+                s_rond++;
+                k_carre = 0;
+            }else {
+                s_carre++;
+                k_rond =0;
+            }
+            //grand ou petit
+            if(p.est_grande == 1){
+                s_grand++;
+                k_petit = 0;
+            }else {
+                s_petit++;
+                k_grand =0;
+            }
+            //plein ou creus
+            if(p.est_pleine == 1){
+                s_plein++;
+                k_creus = 0;
+            }else {
+                s_creus++;
+                k_plein =0;
+            }
+        }
+
+        int res = 0;
+        res += k_blanc*s_blanc + k_noir*s_noir;
+        res += k_carre*s_carre + k_rond*s_rond;
+        res += k_grand*s_grand + k_petit*s_petit;
+        res += k_plein*s_plein + k_creus*s_creus;
+
+        return res;
+    }
+    private int getScoreLins(){
+        int res = 0;
+        for(int line = 0; line < 4; line ++){
+            res += getScoreLine(line);
+        }
+        return res;
+    }
+
+    private int getScoreCol(int col){
+        int k_blanc = 1;
+        int k_noir = 1;
+        int k_rond = 1;
+        int k_carre = 1;
+        int k_grand =1;
+        int k_petit = 1;
+        int k_plein = 1;
+        int k_creus = 1;
+
+        int s_blanc = 0;
+        int s_noir = 0;
+        int s_rond = 0;
+        int s_carre = 0;
+        int s_grand = 0;
+        int s_petit = 0;
+        int s_plein = 0;
+        int s_creus = 0;
+
+        for(int line = 0; line < 4; line ++){
+            int indexP = indice_piece_sur_case_de_plateau[line][col];
+            if(indexP == -1)
+                continue;
+            Piece p = piece[indexP];
+            //blanc ou noir
+            if(p.est_blanche == 1){
+                s_blanc++;
+                k_noir = 0;
+            }else {
+                s_noir++;
+                k_blanc =0;
+            }
+            //rond ou carre
+            if(p.est_ronde == 1){
+                s_rond++;
+                k_carre = 0;
+            }else {
+                s_carre++;
+                k_rond =0;
+            }
+            //grand ou petit
+            if(p.est_grande == 1){
+                s_grand++;
+                k_petit = 0;
+            }else {
+                s_petit++;
+                k_grand =0;
+            }
+            //plein ou creus
+            if(p.est_pleine == 1){
+                s_plein++;
+                k_creus = 0;
+            }else {
+                s_creus++;
+                k_plein =0;
+            }
+        }
+
+        int res = 0;
+        res += k_blanc*s_blanc + k_noir*s_noir;
+        res += k_carre*s_carre + k_rond*s_rond;
+        res += k_grand*s_grand + k_petit*s_petit;
+        res += k_plein*s_plein + k_creus*s_creus;
+
+        return res;
+    }
+
+    private int getScoreCols(){
+        int res = 0;
+        for(int col = 0; col < 4; col++){
+            res += getScoreCol(col);
+        }
+        return res;
+    }
+
+    private int getScoreDiagInf(){
+        int k_blanc = 1;
+        int k_noir = 1;
+        int k_rond = 1;
+        int k_carre = 1;
+        int k_grand =1;
+        int k_petit = 1;
+        int k_plein = 1;
+        int k_creus = 1;
+
+        int s_blanc = 0;
+        int s_noir = 0;
+        int s_rond = 0;
+        int s_carre = 0;
+        int s_grand = 0;
+        int s_petit = 0;
+        int s_plein = 0;
+        int s_creus = 0;
+
+        for(int index = 0; index < 4; index ++){
+            int indexP = indice_piece_sur_case_de_plateau[index][index];
+            if(indexP == -1)
+                continue;
+            Piece p = piece[indexP];
+            //blanc ou noir
+            if(p.est_blanche == 1){
+                s_blanc++;
+                k_noir = 0;
+            }else {
+                s_noir++;
+                k_blanc =0;
+            }
+            //rond ou carre
+            if(p.est_ronde == 1){
+                s_rond++;
+                k_carre = 0;
+            }else {
+                s_carre++;
+                k_rond =0;
+            }
+            //grand ou petit
+            if(p.est_grande == 1){
+                s_grand++;
+                k_petit = 0;
+            }else {
+                s_petit++;
+                k_grand =0;
+            }
+            //plein ou creus
+            if(p.est_pleine == 1){
+                s_plein++;
+                k_creus = 0;
+            }else {
+                s_creus++;
+                k_plein =0;
+            }
+        }
+
+        int res = 0;
+        res += k_blanc*s_blanc + k_noir*s_noir;
+        res += k_carre*s_carre + k_rond*s_rond;
+        res += k_grand*s_grand + k_petit*s_petit;
+        res += k_plein*s_plein + k_creus*s_creus;
+
+        return res;
+    }
+
+    private int getScoreDiagSup(){
+        int k_blanc = 1;
+        int k_noir = 1;
+        int k_rond = 1;
+        int k_carre = 1;
+        int k_grand =1;
+        int k_petit = 1;
+        int k_plein = 1;
+        int k_creus = 1;
+
+        int s_blanc = 0;
+        int s_noir = 0;
+        int s_rond = 0;
+        int s_carre = 0;
+        int s_grand = 0;
+        int s_petit = 0;
+        int s_plein = 0;
+        int s_creus = 0;
+
+        for(int index = 0; index < 4; index ++){
+            int indexP = indice_piece_sur_case_de_plateau[index][3-index];
+            if(indexP == -1)
+                continue;
+            Piece p = piece[indexP];
+            //blanc ou noir
+            if(p.est_blanche == 1){
+                s_blanc++;
+                k_noir = 0;
+            }else {
+                s_noir++;
+                k_blanc =0;
+            }
+            //rond ou carre
+            if(p.est_ronde == 1){
+                s_rond++;
+                k_carre = 0;
+            }else {
+                s_carre++;
+                k_rond =0;
+            }
+            //grand ou petit
+            if(p.est_grande == 1){
+                s_grand++;
+                k_petit = 0;
+            }else {
+                s_petit++;
+                k_grand =0;
+            }
+            //plein ou creus
+            if(p.est_pleine == 1){
+                s_plein++;
+                k_creus = 0;
+            }else {
+                s_creus++;
+                k_plein =0;
+            }
+        }
+
+        int res = 0;
+        res += k_blanc*s_blanc + k_noir*s_noir;
+        res += k_carre*s_carre + k_rond*s_rond;
+        res += k_grand*s_grand + k_petit*s_petit;
+        res += k_plein*s_plein + k_creus*s_creus;
+
+        return res;
+    }
     public int getScore(){
-        //todo
-        return 0;
+        if(getGameStatus()==1)
+            return MAXSCORE;
+        int res = 0;
+        res += getScoreLins();
+        res += getScoreCols();
+        res += getScoreDiagInf();
+        res += getScoreDiagSup();
+
+        return res;
     }
 }
