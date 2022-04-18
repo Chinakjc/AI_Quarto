@@ -104,6 +104,8 @@ public class NewAI {
                     res = p;
                 }
             }
+            unPut(pos);
+            unSelect(p);
         }
         return res;
     }
