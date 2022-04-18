@@ -5,7 +5,6 @@ import Game.oneVsAI.Combination;
 import Game.oneVsAI.Coordinate;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class NewAI {
     private Data data;
