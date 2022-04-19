@@ -18,6 +18,20 @@ public class Backup {
                      //select 1 bit, piece dispo 1bit, position 4bits (2 bits pour lignes et 2 bits pour colonnes)
                     //donc on peut utiliser un nombre de 2 bit de base 16. Donc une chaine de caractere comme "EF"
 
+    int difficulty;
+
+    public Backup(int mode,String player1,String player2,int compteur,String[] infoPieces, int difficulty){
+        this.mode = mode;
+        this.players = new String[2];
+        this.players[0] = player1;
+        this.players[1] = player2;
+        this.compteur = compteur;
+        this.infoPieces = new String[16];
+        for (int i=0;i<16;i++){
+            this.infoPieces[i] = infoPieces[i];
+        }
+        this.difficulty = difficulty;
+    }
     public Backup(int mode,String player1,String player2,int compteur,String[] infoPieces){
         this.mode = mode;
         this.players = new String[2];
@@ -28,6 +42,7 @@ public class Backup {
         for (int i=0;i<16;i++){
             this.infoPieces[i] = infoPieces[i];
         }
+        this.difficulty = 0;
     }
 
     public Backup(){ //definition initiale
@@ -61,6 +76,10 @@ public class Backup {
             infoPieces[i] = BaseConversion.decimalTOHexadecimal(temp).getValue(2);
         }
 
+    }
+
+    public void setDifficulty(int difficulty){
+        this.difficulty = difficulty;
     }
 
     /**
@@ -103,6 +122,7 @@ public class Backup {
                 res.indice_piece_sur_case_de_plateau[l][c] = i;
             }
         }
+        res.difficulty = difficulty;
         return res;
     }
 
@@ -114,9 +134,11 @@ public class Backup {
         FileHandle player1 = new FileHandle("data/"+fileName+".player1");
         FileHandle player2 = new FileHandle("data/"+fileName+".player2");
         FileHandle others = new FileHandle("data/"+fileName+".data");
+        FileHandle diff = new FileHandle("data/"+fileName+".difff");
 
         player1.writeString(players[0],false );
         player2.writeString(players[1],false );
+        diff.writeString(String.valueOf(difficulty),false);
         String temp = new String();
         temp += mode;
         temp += ("#"+compteur);
@@ -136,7 +158,8 @@ public class Backup {
         FileHandle player1 = new FileHandle("data/"+fileName+".player1");
         FileHandle player2 = new FileHandle("data/"+fileName+".player2");
         FileHandle others = new FileHandle("data/"+fileName+".data");
-        if((player1.exists())&&(player2.exists())&&(others.exists())){
+        FileHandle difficulty = new FileHandle("data/"+fileName+".difff");
+        if((player1.exists())&&(player2.exists())&&(others.exists())&&(difficulty.exists())){
             this.players[0] = player1.readString();
             this.players[1] = player2.readString();
             StringTokenizer st = new StringTokenizer(others.readString(),"#");
@@ -146,6 +169,8 @@ public class Backup {
             for (int i=0;i<16;i++){
                 this.infoPieces[i] = st.nextToken();
             }
+
+            this.difficulty = Integer.parseInt(difficulty.readString());
             return true;
         }
         System.out.println("file not found ! ");
@@ -162,7 +187,7 @@ public class Backup {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Backup backup = (Backup) o;
-        return mode == backup.mode && compteur == backup.compteur && Arrays.equals(players, backup.players) && Arrays.equals(infoPieces, backup.infoPieces);
+        return mode == backup.mode && compteur == backup.compteur && Arrays.equals(players, backup.players) && Arrays.equals(infoPieces, backup.infoPieces) && difficulty==backup.difficulty;
     }
 
     //methode genere automatiquement

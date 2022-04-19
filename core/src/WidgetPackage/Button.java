@@ -23,6 +23,8 @@ public class Button extends Widget{
      * @return
      */
     public boolean isClicked(int x, int y){
+        if(!visible)
+            return false;
         int l = (int) (sizeUnite*percentageWidth);
         int h = (int) (sizeUnite*percentageHeight);
         return (x>position_x)&&(x<position_x+l)&&(y>position_y)&&(y<position_y+h);

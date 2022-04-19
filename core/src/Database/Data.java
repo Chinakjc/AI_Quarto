@@ -16,6 +16,8 @@ public class Data {
     public int compteur;
     public String[] liste_joueur;
 
+    public int difficulty;
+
     private final int MAXSCORE = 10000;
 
     public Data(int mode){
@@ -48,6 +50,8 @@ public class Data {
                 indice_piece_sur_case_de_plateau[i][j] = -1;
             }
         }
+
+        this.difficulty = 0; //0 = eazy; 1 = moderate; 2 = difficult
     }
     public Data(Data data){
         this.mode = data.mode;
@@ -60,6 +64,7 @@ public class Data {
         }
         this.compteur = data.compteur;
         this.liste_joueur = new String[]{data.liste_joueur[0],data.liste_joueur[1]};
+        this.difficulty = data.difficulty;
     }
 
     /**

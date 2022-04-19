@@ -59,6 +59,7 @@ public class GameScreenVsAI implements Screen {
     private Button eazy;
     private Button moderate;
     private Button difficult;
+    private int difficulty;
 
     private Backup oldBackup;
 
@@ -69,10 +70,10 @@ public class GameScreenVsAI implements Screen {
     private float vol5;
 
     protected int compter;
-
+    protected int compterMAX;
 
     public GameScreenVsAI(MainGame game){
-        this.niveau = 5;
+        //this.niveau = 5;
         this.game = game;
         this.data = ScreenMenuNewGame.data_vs_ordinateur;
         taille = new SizeMainGame(MainGame.width_current,MainGame.height_current);
@@ -155,7 +156,8 @@ public class GameScreenVsAI implements Screen {
                 ,(int)(0.1*percent*taille.height)
                 ,"eazy.png");
         stage.addActor(eazy);
-        eazy.setColor(Color.TAN);
+        eazy.setColor(Color.CHARTREUSE);
+        //eazy.setColor(Color.TAN);
         eazy.setVisible(false);
 
         moderate = new Button(MainGame.width_current,MainGame.height_current
@@ -167,7 +169,7 @@ public class GameScreenVsAI implements Screen {
                 ,"moderate.png");
         stage.addActor(moderate);
         moderate.setColor(Color.YELLOW);
-        moderate.setVisible(true);
+        moderate.setVisible(false);
 
         difficult = new Button(MainGame.width_current,MainGame.height_current
                 ,taille.width
@@ -180,6 +182,14 @@ public class GameScreenVsAI implements Screen {
         difficult.setColor(Color.SALMON);
         difficult.setVisible(false);
 
+        difficulty = 0;//data.difficulty;
+        /*if(difficulty==0)//eazy
+            eazy.setVisible(true);
+        if(difficulty==1)//moderate
+            moderate.setVisible(true);
+        if(difficulty==2)//difficult
+            difficult.setVisible(true);*/
+
         this.label = new Label("", this.style);
         this.label.setFontScale(this.taille.parametre_taille_label);
         this.label.setPosition(this.taille.position_x_label, this.taille.position_y_label);
@@ -190,6 +200,19 @@ public class GameScreenVsAI implements Screen {
         Setting setting = new Setting();
         setting.readSetting();
         compter = setting.getFps()/2;
+        compterMAX = compter;
+
+        switch (difficulty){
+            case 0:
+                this.niveau = 1;
+                break;
+            case 1:
+                this.niveau = 3;
+                break;
+            default:
+                this.niveau = 6;
+                break;
+        }
     }
 
     /**
@@ -245,6 +268,29 @@ public class GameScreenVsAI implements Screen {
         ScreenUtils.clear(1,1,1,1); //initialisation de la fenetre avec un fond blanc avant l'ajout du background
         compter--; //buffer avant de pouvoir interagir avec la fenetre
 
+
+        //System.out.println(compter);
+        switch (difficulty){
+            case 0:
+                eazy.setVisible(true);
+                moderate.setVisible(false);
+                difficult.setVisible(false);
+                niveau = 1;
+                break;
+            case 1:
+                eazy.setVisible(false);
+                moderate.setVisible(true);
+                difficult.setVisible(false);
+                niveau = 3;
+                break;
+            case 2:
+                eazy.setVisible(false);
+                moderate.setVisible(false);
+                difficult.setVisible(true);
+                niveau = 6;
+                break;
+        }
+
         if(data.getGameStatus()==0){//initialisation des couleurs des boutons sauvegarde/reload/quitter/options
             quit.setColor(Color.BLACK);
             newGame.setColor(Color.BLACK);
@@ -287,6 +333,22 @@ public class GameScreenVsAI implements Screen {
                 data.toBackup().writeData("1");
                 oldBackup = data.toBackup();
             }
+            if((Gdx.input.isTouched())&&(eazy.isClicked(x,y))&&(compter<0)){ //si partie pas finie, cliquer sur bouton de eazy = moderate
+                difficulty = 1;
+                data.difficulty = 1;
+                compter = compterMAX;
+            }
+            if((Gdx.input.isTouched())&&(moderate.isClicked(x,y))&&(compter<0)){ //si partie pas finie, cliquer sur bouton de moderate = difficult
+                difficulty = 2;
+                data.difficulty = 2;
+                compter = compterMAX;
+            }
+            if((Gdx.input.isTouched())&&(difficult.isClicked(x,y))&&(compter<0)){ //si partie pas finie, cliquer sur bouton de difficult = eazy
+                difficulty = 0;
+                data.difficulty = 0;
+                compter = compterMAX;
+            }
+
 
             int k = 0; // k=1 : piece selectionnee ; k=0 : pas de piece selectionnee
             int i = -1;
