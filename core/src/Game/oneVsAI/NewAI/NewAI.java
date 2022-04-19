@@ -14,7 +14,9 @@ public class NewAI {
         this.data = new Data(data);
         this.depth = depth;
     }
-
+    private int getGameStatus(){
+        return data.getGameStatus();
+    }
     private int getScore(){
         return data.getScore();
     }
@@ -44,7 +46,6 @@ public class NewAI {
         return data.getPiecesDisponibles();
     }
 
-
     private Coordinate getPostion(int piece){
         ArrayList<Coordinate> options = getPostionsDisponibles();
         if(depth<=0)
@@ -70,16 +71,37 @@ public class NewAI {
             return res;
         }
 
+        int score = 0;
+        Coordinate res = null;
         for (Coordinate pos :options
-             ) {
+        ) {
             put(piece,pos);
-            int piece1 = getPiece();
-            NewAI ai = new NewAI(data,depth-1);
-            return ai.getPostion(piece1);
+            int s = 0;
+            if(getGameStatus()==1) //gagne
+                return pos;
+            if(getGameStatus()==0) { //pas fini
+                int piece1 = getPiece();
+                select(piece1);
+                NewAI newAI = new NewAI(data,depth -1);
+                Coordinate pos1 = newAI.getPostion(piece1);
+                put(piece1,pos1);
+                s = getScore();
+                unPut(pos1);
+                unSelect(piece1);
+            }
+            unPut(pos);
+            if(res == null){
+                res = pos;
+                score = s;
+
+            }else{
+                if(s<score){  //MIN
+                    res = pos;
+                    score = s;
+                }
+            }
         }
-
-
-        return new Coordinate(0,0);
+        return res;
     }
 
     private int getPiece(){
