@@ -182,7 +182,7 @@ public class GameScreenVsAI implements Screen {
         difficult.setColor(Color.SALMON);
         difficult.setVisible(false);
 
-        difficulty = 0;//data.difficulty;
+        difficulty = data.difficulty;
         /*if(difficulty==0)//eazy
             eazy.setVisible(true);
         if(difficulty==1)//moderate

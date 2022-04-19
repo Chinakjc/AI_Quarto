@@ -158,8 +158,8 @@ public class Backup {
         FileHandle player1 = new FileHandle("data/"+fileName+".player1");
         FileHandle player2 = new FileHandle("data/"+fileName+".player2");
         FileHandle others = new FileHandle("data/"+fileName+".data");
-        FileHandle difficulty = new FileHandle("data/"+fileName+".difff");
-        if((player1.exists())&&(player2.exists())&&(others.exists())&&(difficulty.exists())){
+        FileHandle diff = new FileHandle("data/"+fileName+".difff");
+        if((player1.exists())&&(player2.exists())&&(others.exists())&&(diff.exists())){
             this.players[0] = player1.readString();
             this.players[1] = player2.readString();
             StringTokenizer st = new StringTokenizer(others.readString(),"#");
@@ -170,7 +170,7 @@ public class Backup {
                 this.infoPieces[i] = st.nextToken();
             }
 
-            this.difficulty = Integer.parseInt(difficulty.readString());
+            this.difficulty = Integer.parseInt(diff.readString());
             return true;
         }
         System.out.println("file not found ! ");
