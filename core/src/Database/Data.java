@@ -558,7 +558,7 @@ public class Data {
         ArrayList<Coordinate> res = new ArrayList<>();
         for(int line = 0; line < 4; line ++){
             for(int col = 0; col < 4; col ++){
-                if(indice_piece_sur_case_de_plateau[line][col]!=-1){
+                if(indice_piece_sur_case_de_plateau[line][col]==-1){
                     Coordinate pos = new Coordinate(line,col);
                     res.add(pos);
                 }
@@ -581,13 +581,30 @@ public class Data {
     }
     public void put(int p, Coordinate pos){
         indice_piece_sur_case_de_plateau[pos.getX()][pos.getY()] = p;
+        piece[p].setOnBoard(pos.getX(),pos.getY());
     }
 
     public void unPut(Coordinate pos){
+        int p = indice_piece_sur_case_de_plateau[pos.getX()][pos.getY()];
         indice_piece_sur_case_de_plateau[pos.getX()][pos.getY()] = -1;
+        select(p);
+        piece[p].est_disponible=1;
     }
 
+
+
     public void unSelect(int p){
-        piece[p].est_disponible = 1;
+        piece[p].est_selectionnee = 0;
+    }
+
+    public int getPieceSelectionne(){
+        int res = 0;
+        for (Piece p:piece
+             ) {
+            if(p.est_selectionnee == 1)
+                return res;
+            res++;
+        }
+        return  -1;
     }
 }

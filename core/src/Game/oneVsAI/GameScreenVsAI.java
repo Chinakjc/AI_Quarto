@@ -4,6 +4,7 @@ import Database.Backup;
 import Database.Data;
 import Database.Setting;
 import Game.main.*;
+import Game.oneVsAI.NewAI.NewAI;
 import MainMenu.ScreenMainMenu;
 import MenuNewGame.ScreenMenuNewGame;
 
@@ -67,7 +68,7 @@ public class GameScreenVsAI implements Screen {
 
 
     public GameScreenVsAI(MainGame game){
-        this.niveau = 3;
+        this.niveau = 5;
         this.game = game;
         this.data = ScreenMenuNewGame.data_vs_ordinateur;
         taille = new SizeMainGame(MainGame.width_current,MainGame.height_current);
@@ -235,7 +236,6 @@ public class GameScreenVsAI implements Screen {
         int y= Gdx.input.getY();
         y = MainGame.height_current-y;
 
-
         if(data.getGameStatus()==0) {
             if (Gdx.input.isKeyPressed(Keys.M)) { //si partie pas finie, appuyer sur M = sauvegarde + retour menu principal
                 this.dispose();
@@ -307,22 +307,28 @@ public class GameScreenVsAI implements Screen {
                     }
                 }
                 else{
-                    AI ia = new AI(Math.min(this.niveau,(this.data.compteur+1)/2),this.data).intelligence();
-                    Vector<Combination> option = ia.options; //vecteur des coups possibles pour l'IA
-                    int n0 = (int)(Math.random()*option.size());
-                    Coordinate pos;
-                    if(option.size()>0) { //si l'IA a des coups a jouer
+                    NewAI newAI = new NewAI(Math.min(this.niveau,(this.data.compteur+1)/2),this.data);
+                    Coordinate pos = newAI.getPosition(i);
+                    //AI ia = new AI(Math.min(this.niveau,(this.data.compteur+1)/2),this.data).intelligence();
+                    //Vector<Combination> option = ia.options; //vecteur des coups possibles pour l'IA
+                    //int n0 = (int)(Math.random()*option.size());
+                    //Coordinate pos;
+                    /*if(option.size()>0) { //si l'IA a des coups a jouer
                         pos = option.elementAt(n0).getPos(); //IA choisit une piece
-                    }
-                    else{ //si l'IA n'a plus de coup possible
+                    }*/
+                   /* else{ //si l'IA n'a plus de coup possible
                         pos = ia.getPositionsFree().elementAt(0); // donnera une piece parmi celles restantes
-                    }
+                    }*/
 
+                    //System.out.println("piece = "+i);
                     pieceActor[i].mettre_au_plateau(pos.getX(),pos.getY());
+                    //System.out.println("OK");
                     this.indice_piece_sur_case_de_plateau[pos.getX()][pos.getY()] = i;
 
                     if(this.data.getGameStatus()==0) {
-                        pieceActor[option.elementAt(n0).getPiece()].select();
+                        newAI.put(i,pos);
+                        int piece1 = newAI.getPiece();
+                        pieceActor[piece1].select();
 
                         data.compteur++;
                         this.indice_joueur = data.compteur % 2;

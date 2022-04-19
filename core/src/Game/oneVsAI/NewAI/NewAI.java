@@ -10,7 +10,7 @@ public class NewAI {
     private Data data;
     private int depth;
 
-    public NewAI(Data data,int depth){
+    public NewAI(int depth,Data data){
         this.data = new Data(data);
         this.depth = depth;
     }
@@ -21,7 +21,7 @@ public class NewAI {
         return data.getScore();
     }
 
-    private void put(int piece,Coordinate pos){
+    public void put(int piece,Coordinate pos){
         data.put(piece,pos);
     }
 
@@ -30,7 +30,7 @@ public class NewAI {
     }
 
 
-    private void select(int p){
+    public void select(int p){
         data.select(p);
     }
 
@@ -38,7 +38,10 @@ public class NewAI {
         data.unSelect(p);
     }
 
-    public ArrayList<Coordinate> getPostionsDisponibles(){
+    private int getPieceSelectionnee(){
+        return data.getPieceSelectionne();
+    }
+    private ArrayList<Coordinate> getPostionsDisponibles(){
         return data.getPostionsDisponibles();
     }
 
@@ -46,8 +49,9 @@ public class NewAI {
         return data.getPiecesDisponibles();
     }
 
-    private Coordinate getPostion(int piece){
+    public Coordinate getPosition(int piece){
         ArrayList<Coordinate> options = getPostionsDisponibles();
+        //System.out.println("len = "+options.size());
         if(depth<=0)
             return options.get(0);
         if(depth==1){
@@ -55,7 +59,9 @@ public class NewAI {
             Coordinate res = null;
             for (Coordinate pos :options
             ) {
+                //System.out.println("Test0");
                 put(piece,pos);
+                //System.out.println("Test1");
                 if(res == null){
                     res = pos;
                     score = getScore();
@@ -66,7 +72,9 @@ public class NewAI {
                         score = s;
                     }
                 }
+                //System.out.println("Test3");
                 unPut(pos);
+                //System.out.println("Test4");
             }
             return res;
         }
@@ -75,15 +83,17 @@ public class NewAI {
         Coordinate res = null;
         for (Coordinate pos :options
         ) {
+            //System.out.println("x = "+pos.getX());
             put(piece,pos);
             int s = 0;
             if(getGameStatus()==1) //gagne
                 return pos;
             if(getGameStatus()==0) { //pas fini
-                int piece1 = getPiece();
+                NewAI newAI = new NewAI(depth -1,data);
+                int piece1 = newAI.getPiece();
                 select(piece1);
-                NewAI newAI = new NewAI(data,depth -1);
-                Coordinate pos1 = newAI.getPostion(piece1);
+                newAI.select(piece1);
+                Coordinate pos1 = newAI.getPosition(piece1);
                 put(piece1,pos1);
                 s = getScore();
                 unPut(pos1);
@@ -104,7 +114,11 @@ public class NewAI {
         return res;
     }
 
-    private int getPiece(){
+    public Coordinate getPosition(){
+        int piece = getPieceSelectionnee();
+        return getPosition(piece);
+    }
+    public int getPiece(){
         ArrayList<Integer> options = getPiecesDisponibles();
         if(depth<=0){
             return options.get(0);
@@ -114,7 +128,7 @@ public class NewAI {
         for (Integer p:options
              ) {
             select(p);
-            Coordinate pos = getPostion(p);
+            Coordinate pos = getPosition(p);
             put(p,pos);
             if(res == null){
                 res = p;
