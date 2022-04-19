@@ -261,6 +261,7 @@ public class Data {
         res.setMode(mode);
         res.setPlayers(liste_joueur[0],liste_joueur[1] );
         res.setInfoPieces(piece);
+        res.setDifficulty(difficulty);
 
         return res;
     }
