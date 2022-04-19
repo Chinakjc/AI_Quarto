@@ -36,7 +36,7 @@ public class DesktopLauncher {
 		int fps = setting.getFps();
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title="Quarto V1.0";
+		config.title="Quarto V2.0";
 		config.foregroundFPS = fps;
 		config.width = width;
 		config.height = height;
