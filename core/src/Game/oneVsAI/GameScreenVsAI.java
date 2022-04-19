@@ -56,6 +56,10 @@ public class GameScreenVsAI implements Screen {
     private Button quit;
     private Button settings;
 
+    private Button eazy;
+    private Button moderate;
+    private Button difficult;
+
     private Backup oldBackup;
 
     private float vol1;
@@ -142,6 +146,39 @@ public class GameScreenVsAI implements Screen {
                 ,"setting.png");
         stage.addActor(settings);
         settings.setVisible(true);
+
+        eazy = new Button(MainGame.width_current,MainGame.height_current
+                ,taille.width
+                ,percent
+                ,percent
+                ,(int)(0.1*percent*taille.width) + (int)(1.5*percent*taille.width)
+                ,(int)(0.1*percent*taille.height)
+                ,"eazy.png");
+        stage.addActor(eazy);
+        eazy.setColor(Color.TAN);
+        eazy.setVisible(false);
+
+        moderate = new Button(MainGame.width_current,MainGame.height_current
+                ,taille.width
+                ,percent
+                ,percent
+                ,(int)(0.1*percent*taille.width) + (int)(1.5*percent*taille.width)
+                ,(int)(0.1*percent*taille.height)
+                ,"moderate.png");
+        stage.addActor(moderate);
+        moderate.setColor(Color.YELLOW);
+        moderate.setVisible(true);
+
+        difficult = new Button(MainGame.width_current,MainGame.height_current
+                ,taille.width
+                ,percent
+                ,percent
+                ,(int)(0.1*percent*taille.width) + (int)(1.5*percent*taille.width)
+                ,(int)(0.1*percent*taille.height)
+                ,"difficult.png");
+        stage.addActor(difficult);
+        difficult.setColor(Color.SALMON);
+        difficult.setVisible(false);
 
         this.label = new Label("", this.style);
         this.label.setFontScale(this.taille.parametre_taille_label);
