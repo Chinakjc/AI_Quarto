@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * La classe sert à enregistrer toutes les donnees liees a l'avancement d'une partie
+ * Des methodes sont aujoutees en 2022 pour amelioration de l'IA.
  */
 public class Data {
     public int mode; // 1 pour vs ai; 0 pour 1v1
@@ -266,6 +267,13 @@ public class Data {
         return res;
     }
 
+    /**
+     * Etant donne l'indice de ligne, obtenir le score de cette ligne
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @param line
+     * @return
+     */
     private int getScoreLine(int line){
         int k_blanc = 1;
         int k_noir = 1;
@@ -332,6 +340,13 @@ public class Data {
 
         return res;
     }
+
+    /**
+     * obtenir le score de toutes les lignes.
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     private int getScoreLins(){
         int res = 0;
         for(int line = 0; line < 4; line ++){
@@ -340,6 +355,13 @@ public class Data {
         return res;
     }
 
+    /**
+     * Etant donne l'indice de colonne, obtenir le score de cette colonne
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @param col
+     * @return
+     */
     private int getScoreCol(int col){
         int k_blanc = 1;
         int k_noir = 1;
@@ -407,6 +429,12 @@ public class Data {
         return res;
     }
 
+    /**
+     * obtenir le score de toutes les colonnes.
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     private int getScoreCols(){
         int res = 0;
         for(int col = 0; col < 4; col++){
@@ -415,6 +443,12 @@ public class Data {
         return res;
     }
 
+    /**
+     * obtenir le score de diagonal inferieur
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     private int getScoreDiagInf(){
         int k_blanc = 1;
         int k_noir = 1;
@@ -482,6 +516,12 @@ public class Data {
         return res;
     }
 
+    /**
+     * obtenir le score de diagonal superieur
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     private int getScoreDiagSup(){
         int k_blanc = 1;
         int k_noir = 1;
@@ -548,6 +588,13 @@ public class Data {
 
         return res;
     }
+
+    /**
+     * obtenir le score de toutes les lignes, colonnes et diagonaux.
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     public int getScore(){
         if(getGameStatus()==1)
             return MAXSCORE;
@@ -560,6 +607,12 @@ public class Data {
         return res;
     }
 
+    /**
+     * obtenir les positions où il n'y a pas de piece.
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     public ArrayList<Coordinate> getPostionsDisponibles(){
         ArrayList<Coordinate> res = new ArrayList<>();
         for(int line = 0; line < 4; line ++){
@@ -573,6 +626,12 @@ public class Data {
         return res;
     }
 
+    /**
+     * obtenir les pieces disponibles
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     public ArrayList<Integer> getPiecesDisponibles(){
         ArrayList<Integer> res = new ArrayList<>();
         for(int i = 0; i< 16; i++){
@@ -582,14 +641,34 @@ public class Data {
         return res;
     }
 
+    /**
+     * selectionner une piece
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @param p
+     */
     public void select(int p){
         piece[p].select();
     }
+
+    /**
+     * poser une piece
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @param p
+     * @param pos
+     */
     public void put(int p, Coordinate pos){
         indice_piece_sur_case_de_plateau[pos.getX()][pos.getY()] = p;
         piece[p].setOnBoard(pos.getX(),pos.getY());
     }
 
+    /**
+     * deposer une piece
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @param pos
+     */
     public void unPut(Coordinate pos){
         int p = indice_piece_sur_case_de_plateau[pos.getX()][pos.getY()];
         indice_piece_sur_case_de_plateau[pos.getX()][pos.getY()] = -1;
@@ -598,11 +677,22 @@ public class Data {
     }
 
 
-
+    /**
+     * deselectionner une piece
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @param p
+     */
     public void unSelect(int p){
         piece[p].est_selectionnee = 0;
     }
 
+    /**
+     * obtenir la piece selectionnee
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     public int getPieceSelectionne(){
         int res = 0;
         for (Piece p:piece
