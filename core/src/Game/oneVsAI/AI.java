@@ -8,18 +8,18 @@ import java.util.Vector;
 /**
  * La classe sert a gerer l'intelligence artificielle pour jouer contre l'ordinateur
  */
-public class AI_New {
+public class AI {
     private int niveau;
     public Data data;
     public Vector<Combination> options;
 
-    public AI_New(int niveau, Data data){
+    public AI(int niveau, Data data){
         this.niveau = niveau;
         this.data = new Data(data);
         this.options = this.getOptions();
     }
 
-    public AI_New(AI_New ia){
+    public AI(AI ia){
         this(ia.niveau, ia.data);
     }
 
@@ -72,8 +72,8 @@ public class AI_New {
      * C'est une methode qui donne toutes les possibilites de pieces disponibles et de positions sur le plateau disponibles.
      * @return
      * @see Coordinate
-     * @see AI_New#getPositionsFree()
-     * @see AI_New#getPiecesFree()
+     * @see AI#getPositionsFree()
+     * @see AI#getPiecesFree()
      * @see Combination
      */
     private Vector<Combination> getOptions(){
@@ -127,23 +127,23 @@ public class AI_New {
     /**
      * C'est une methode pour calculer la meilleure option.
      * @return
-     * @see AI_New#getIndexPiecePicked()
+     * @see AI#getIndexPiecePicked()
      * @see Coordinate
      * @see Combination
      * @see Combination#getPos()
      * @see Combination#getPiece()
-     * @see AI_New#setOnBoard(int, int, int)
-     * @see AI_New#next()
-     * @see AI_New#getOptions()
+     * @see AI#setOnBoard(int, int, int)
+     * @see AI#next()
+     * @see AI#getOptions()
      */
-    public AI_New intelligence(){
+    public AI intelligence(){
         if((niveau ==0)||(data.getGameStatus()!=0))
             return this;
         int p0 = this.getIndexPiecePicked();
 
         for (int i=0; i< options.size();i++){
 
-            AI_New res = new AI_New(this);
+            AI res = new AI(this);
             Coordinate pos = options.elementAt(i).getPos();
             res.setOnBoard(p0,pos.getX(),pos.getY());
             res.next();
@@ -154,7 +154,7 @@ public class AI_New {
             }
             int p1 = options.elementAt(i).getPiece();
             res.selec(p1);
-            AI_New temp = res.intelligence();
+            AI temp = res.intelligence();
             Vector<Combination> poubelle = new Vector<>();
             if ((res.niveau - temp.niveau) %2  == 1) {// C'est adversaire qui va gagner
                 if ((res.niveau - temp.niveau) == 1)

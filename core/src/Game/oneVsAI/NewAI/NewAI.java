@@ -6,6 +6,9 @@ import Game.oneVsAI.Coordinate;
 
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class NewAI {
     private Data data;
     private int depth;

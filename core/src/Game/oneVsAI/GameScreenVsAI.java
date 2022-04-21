@@ -273,9 +273,9 @@ public class GameScreenVsAI implements Screen {
      * @see Coordinate
      * @see Coordinate#getX()
      * @see Coordinate#getY()
-     * @see AI_New
-     * @see AI_New#intelligence()
-     * @see AI_New#getPositionsFree()
+     * @see AI
+     * @see AI#intelligence()
+     * @see AI#getPositionsFree()
      */
     @Override
     public void render(float delta){
