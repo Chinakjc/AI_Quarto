@@ -59,6 +59,8 @@ public class GameScreenVsAI implements Screen {
     private Button eazy;
     private Button moderate;
     private Button difficult;
+
+    private Button veryDifficult;
     private int difficulty;
 
     private Backup oldBackup;
@@ -182,6 +184,17 @@ public class GameScreenVsAI implements Screen {
         difficult.setColor(Color.SALMON);
         difficult.setVisible(false);
 
+        veryDifficult = new Button(MainGame.width_current,MainGame.height_current
+                ,taille.width
+                ,percent
+                ,percent
+                ,(int)(0.1*percent*taille.width) + (int)(1.5*percent*taille.width)
+                ,(int)(0.1*percent*taille.height)
+                ,"veryDifficult.png");
+        stage.addActor(veryDifficult);
+        veryDifficult.setColor(Color.RED);
+        veryDifficult.setVisible(false);
+
         difficulty = data.difficulty;
         /*if(difficulty==0)//eazy
             eazy.setVisible(true);
@@ -209,8 +222,11 @@ public class GameScreenVsAI implements Screen {
             case 1:
                 this.niveau = 3;
                 break;
+            case 2:
+                this.niveau = 5;
+                break;
             default:
-                this.niveau = 6;
+                this.niveau = 10;
                 break;
         }
     }
@@ -275,19 +291,29 @@ public class GameScreenVsAI implements Screen {
                 eazy.setVisible(true);
                 moderate.setVisible(false);
                 difficult.setVisible(false);
+                veryDifficult.setVisible(false);
                 niveau = 1;
                 break;
             case 1:
                 eazy.setVisible(false);
                 moderate.setVisible(true);
                 difficult.setVisible(false);
+                veryDifficult.setVisible(false);
                 niveau = 3;
                 break;
             case 2:
                 eazy.setVisible(false);
                 moderate.setVisible(false);
                 difficult.setVisible(true);
-                niveau = 6;
+                veryDifficult.setVisible(false);
+                niveau = 5;
+                break;
+            default:
+                eazy.setVisible(false);
+                moderate.setVisible(false);
+                difficult.setVisible(false);
+                veryDifficult.setVisible(true);
+                niveau = 10;
                 break;
         }
 
@@ -344,6 +370,11 @@ public class GameScreenVsAI implements Screen {
                 compter = compterMAX;
             }
             if((Gdx.input.isTouched())&&(difficult.isClicked(x,y))&&(compter<0)){ //si partie pas finie, cliquer sur bouton de difficult = eazy
+                difficulty = 3;
+                data.difficulty = 3;
+                compter = compterMAX;
+            }
+            if((Gdx.input.isTouched())&&(veryDifficult.isClicked(x,y))&&(compter<0)){ //si partie pas finie, cliquer sur bouton de difficult = eazy
                 difficulty = 0;
                 data.difficulty = 0;
                 compter = compterMAX;

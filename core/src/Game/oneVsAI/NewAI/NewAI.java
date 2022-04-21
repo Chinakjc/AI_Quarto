@@ -88,7 +88,7 @@ public class NewAI {
             //System.out.println("x = "+pos.getX());
             put(piece,pos);
             int s = 0;
-            if(getGameStatus()==1) //gagne
+            if(getGameStatus()==1) //gagne  // alpha-beta
                 return pos;
             if(getGameStatus()==0) { //pas fini
                 NewAI newAI = new NewAI(depth -1,data);
@@ -107,6 +107,9 @@ public class NewAI {
                 score = s;
 
             }else{
+                if(s<MINSCORE){ //alpha-beta
+                    return pos;
+                }
                 if(s<score){  //MIN
                     res = pos;
                     score = s;
@@ -144,7 +147,7 @@ public class NewAI {
             }
             unPut(pos);
             unSelect(p);
-            if(score < MINSCORE)
+            if(score < MINSCORE)  // alpha-beta
                 return p;
         }
         return res;
