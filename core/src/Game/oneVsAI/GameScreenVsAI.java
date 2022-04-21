@@ -306,14 +306,14 @@ public class GameScreenVsAI implements Screen {
                 moderate.setVisible(false);
                 difficult.setVisible(true);
                 veryDifficult.setVisible(false);
-                niveau = 5;
+                niveau = 4;
                 break;
             default:
                 eazy.setVisible(false);
                 moderate.setVisible(false);
                 difficult.setVisible(false);
                 veryDifficult.setVisible(true);
-                niveau = 10;
+                niveau = 9;
                 break;
         }
 
