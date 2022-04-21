@@ -10,6 +10,8 @@ public class NewAI {
     private Data data;
     private int depth;
 
+    private final int MINSCORE = 4;
+
     public NewAI(int depth,Data data){
         this.data = new Data(data);
         this.depth = depth;
@@ -142,6 +144,8 @@ public class NewAI {
             }
             unPut(pos);
             unSelect(p);
+            if(score < MINSCORE)
+                return p;
         }
         return res;
     }
