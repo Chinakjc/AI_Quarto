@@ -1,13 +1,15 @@
 package Game.oneVsAI.NewAI;
 
 import Database.Data;
-import Game.oneVsAI.Combination;
+
 import Game.oneVsAI.Coordinate;
 
 import java.util.ArrayList;
 
 /**
- *
+ * @author Jincheng KE, Yi Qin
+ * @since 2022
+ * Nouvelle classe pour améliorer l'IA
  */
 public class NewAI {
     private Data data;
@@ -15,48 +17,121 @@ public class NewAI {
 
     private final int MINSCORE = 0;
 
+    /**
+     * Constructeur de cette classe
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @param depth
+     * @param data
+     */
     public NewAI(int depth,Data data){
         this.data = new Data(data);
         this.depth = depth;
     }
+
+    /**
+     * pour obtenir le statu de jeu.
+     * 1 == gagner, 0 == jeu pas fini, -1 == match null
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     private int getGameStatus(){
         return data.getGameStatus();
     }
+
+    /**
+     * methode pour mesurer le score d'un etat
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     private int getScore(){
         return data.getScore();
     }
 
+    /**
+     * poser une piece à une position
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @param piece
+     * @param pos
+     */
     public void put(int piece,Coordinate pos){
         data.put(piece,pos);
     }
 
+    /**
+     * deposer une piece.
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @param pos
+     */
     private void unPut(Coordinate pos){
         data.unPut(pos);
     }
 
 
+    /**
+     * selectionner une piece
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @param p
+     */
     public void select(int p){
         data.select(p);
     }
 
+    /**
+     * Deselectionner une piece
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @param p
+     */
     private void unSelect(int p){
         data.unSelect(p);
     }
 
+    /**
+     * obtenir la piece sellectionnee
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     private int getPieceSelectionnee(){
         return data.getPieceSelectionne();
     }
+
+    /**
+     * Obtenir les posisions où il n'y a pas de piece
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     private ArrayList<Coordinate> getPostionsDisponibles(){
         return data.getPostionsDisponibles();
     }
 
+    /**
+     * obtenir les pieces disponibles
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     public ArrayList<Integer> getPiecesDisponibles(){
         return data.getPiecesDisponibles();
     }
 
+    /**
+     * Obtenir la meilleure position étant donné une piece en utilisant l'algo Min-Max et Alpha-Beta
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @param piece
+     * @return
+     */
+
     public Coordinate getPosition(int piece){
         ArrayList<Coordinate> options = getPostionsDisponibles();
-        //System.out.println("len = "+options.size());
         if(depth<=0)
             return options.get(0);
         if(depth==1){
@@ -64,9 +139,7 @@ public class NewAI {
             Coordinate res = null;
             for (Coordinate pos :options
             ) {
-                //System.out.println("Test0");
                 put(piece,pos);
-                //System.out.println("Test1");
                 if(res == null){
                     res = pos;
                     score = getScore();
@@ -77,9 +150,7 @@ public class NewAI {
                         score = s;
                     }
                 }
-                //System.out.println("Test3");
                 unPut(pos);
-                //System.out.println("Test4");
             }
             return res;
         }
@@ -88,12 +159,11 @@ public class NewAI {
         Coordinate res = null;
         for (Coordinate pos :options
         ) {
-            //System.out.println("x = "+pos.getX());
             put(piece,pos);
             int s = 0;
             if(getGameStatus()==1) //gagne  // alpha-beta
                 return pos;
-            if(getGameStatus()==0) { //pas fini
+            if(getGameStatus()==0) { //jeu pas fini
                 NewAI newAI = new NewAI(depth -1,data);
                 int piece1 = newAI.getPiece();
                 select(piece1);
@@ -122,10 +192,23 @@ public class NewAI {
         return res;
     }
 
+    /**
+     * Obtenir la meilleure position
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     public Coordinate getPosition(){
         int piece = getPieceSelectionnee();
         return getPosition(piece);
     }
+
+    /**
+     * obtenir la meilleure piece
+     * @author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
     public int getPiece(){
         ArrayList<Integer> options = getPiecesDisponibles();
         if(depth<=0){
@@ -156,17 +239,5 @@ public class NewAI {
         return res;
     }
 
-    public Combination AI(){
-        //if choisir la piece alors choir une piece par hasard
-        // return
-        //else
-        // pos = getPosition()
-        // update data
-        // p = getPiece()
-        // return new Combination(pos,p)
 
-
-        //todo
-        return new Combination(new Coordinate(0,0),0);
-    }
 }
