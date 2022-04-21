@@ -10,7 +10,7 @@ public class NewAI {
     private Data data;
     private int depth;
 
-    private final int MINSCORE = 1;
+    private final int MINSCORE = 3;
 
     public NewAI(int depth,Data data){
         this.data = new Data(data);
