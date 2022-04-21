@@ -23,8 +23,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.*;
 
-import java.util.Vector;
-
 /**
  * La classe sert a l'affichage de la partie contre l'ordinateur / l'AI
  */
@@ -275,9 +273,9 @@ public class GameScreenVsAI implements Screen {
      * @see Coordinate
      * @see Coordinate#getX()
      * @see Coordinate#getY()
-     * @see AI
-     * @see AI#intelligence()
-     * @see AI#getPositionsFree()
+     * @see AI_New
+     * @see AI_New#intelligence()
+     * @see AI_New#getPositionsFree()
      */
     @Override
     public void render(float delta){
