@@ -33,7 +33,7 @@ public class NewAI {
     }
 
     /**
-     * pour obtenir le statu de jeu.
+     * Pour obtenir le statut de jeu.
      * 1 == gagner, 0 == jeu pas fini, -1 == match null
      * @author Jincheng KE, Yi Qin
      * @since 2022
@@ -44,7 +44,7 @@ public class NewAI {
     }
 
     /**
-     * methode pour mesurer le score d'un etat
+     * Méthode pour mesurer le score d'un état.
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @return
@@ -54,7 +54,7 @@ public class NewAI {
     }
 
     /**
-     * poser une piece à une position
+     * Poser une pièce à une position.
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @param piece
@@ -65,7 +65,7 @@ public class NewAI {
     }
 
     /**
-     * deposer une piece.
+     * Déposer une pièce.
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @param pos
@@ -76,7 +76,7 @@ public class NewAI {
 
 
     /**
-     * selectionner une piece
+     * Sélectionner une pièce
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @param p
@@ -86,7 +86,7 @@ public class NewAI {
     }
 
     /**
-     * Deselectionner une piece
+     * Désélectionner une pièce
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @param p
@@ -96,7 +96,7 @@ public class NewAI {
     }
 
     /**
-     * obtenir la piece sellectionnee
+     * Obtenir la pièce sélectionnée
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @return
@@ -106,7 +106,7 @@ public class NewAI {
     }
 
     /**
-     * Obtenir les posisions où il n'y a pas de piece
+     * Obtenir les positions où il n'y a pas de pièce
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @return
@@ -116,7 +116,7 @@ public class NewAI {
     }
 
     /**
-     * obtenir les pieces disponibles
+     * Obtenir les pièces disponibles
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @return
@@ -126,7 +126,7 @@ public class NewAI {
     }
 
     /**
-     * Obtenir la meilleure position étant donné une piece en utilisant l'algo Min-Max et Alpha-Beta
+     * Obtenir la meilleure position étant donné une pièce en utilisant l'algo Min-Max et Alpha-Beta
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @param piece
@@ -211,7 +211,7 @@ public class NewAI {
     }
 
     /**
-     * obtenir la meilleure piece
+     * Obtenir la meilleure pièce
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @return

@@ -6,8 +6,8 @@ import Game.oneVsAI.Coordinate;
 import java.util.ArrayList;
 
 /**
- * La classe sert à enregistrer toutes les donnees liees a l'avancement d'une partie
- * Des methodes sont aujoutees en 2022 pour amelioration de l'IA.
+ *  La classe sert à enregistrer toutes les données liées à l'avancement d'une partie
+ * Des méthodes sont ajoutées en 2022 pour amélioration de l'IA.
  */
 public class Data {
     public int mode; // 1 pour vs ai; 0 pour 1v1
@@ -71,7 +71,7 @@ public class Data {
     }
 
     /**
-     * C'est une methode qui verifie la ligne indiquee
+     * C'est une méthode qui vérifie la ligne indiquée
      * @param ligne
      * @return
      * @see Piece
@@ -97,7 +97,7 @@ public class Data {
     }
 
     /**
-     * C'est une methode qui verifie la colonne indiquee
+     * C'est une méthode qui vérifie la colonne indiquée
      * @param colonne
      * @return
      * @see Piece
@@ -123,7 +123,7 @@ public class Data {
     }
 
     /**
-     * C'est une methode qui verifie la premiere diagonale.
+     * C'est une méthode qui vérifie la première diagonale.
      * @return
      * @see Piece
      */
@@ -148,7 +148,7 @@ public class Data {
     }
 
     /**
-     * C'est une methode qui verifie la seconde diagonale.
+     * C'est une méthode qui vérifie la seconde diagonale.
      * @return
      * @see Piece
      */
@@ -173,7 +173,7 @@ public class Data {
     }
 
     /**
-     * C'est une methode qui verifie toutes les lignes.
+     * C'est une méthode qui vérifie toutes les lignes.
      * @return
      * @see Data#isLineDone(int)
      */
@@ -186,7 +186,7 @@ public class Data {
     }
 
     /**
-     * C'est une methode qui verifie toutes les colonnes.
+     * C'est une méthode qui vérifie toutes les colonnes.
      * @return
      * @see Data#isColumnDone(int)
      */
@@ -199,7 +199,7 @@ public class Data {
     }
 
     /**
-     * C'est une methode qui verifie toutes les diagonales.
+     * C'est une méthode qui vérifie toutes les diagonales.
      * @return
      * @see Data#isDiagonal1Done()
      * @see Data#isDiagonal2Done()
@@ -210,7 +210,7 @@ public class Data {
 
 
     /**
-     * C'est une methode qui verifie le plateau.
+     * C'est une méthode qui vérifie le plateau.
      * @return
      * @see Data#isDiagonalsDone()
      * @see Data#isLinesDone()
@@ -223,7 +223,7 @@ public class Data {
     }
 
     /**
-     * C'est une methode qui verifie s'il y a des cases vide sur la plateau.
+     * C'est une méthode qui vérifie s'il y a des cases vides sur le plateau.
      * @return
      */
     private boolean existe_la_case_vide(){
@@ -236,7 +236,7 @@ public class Data {
     }
 
     /**
-     * C'est une methode qui donne le statut de Jeu.
+     * C'est une méthode qui donne le statut de jeu.
      * Il retourne 1 si un joueur a gagne, 0 si le jeu n'est pas encore fini, et -1 pour le cas de match nul.
      * @return
      * @see Data#isBoardDone()
@@ -249,7 +249,7 @@ public class Data {
     }
 
     /**
-     * C'est une methode qui peut transformer les datas essentiels dans l'objet Data et retourner un objet de classe Backup.
+     * C'est une méthode qui peut transformer les dataient essentiels dans l'objet Data et retourner un objet de classe Backup.
      * @return
      * @see Backup
      * @see Backup#setCompteur(int)
@@ -270,7 +270,7 @@ public class Data {
     }
 
     /**
-     * Etant donne l'indice de ligne, obtenir le score de cette ligne
+     * Étant donne l'indice de ligne, obtenir le score de cette ligne
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @param line
@@ -344,7 +344,7 @@ public class Data {
     }
 
     /**
-     * obtenir le score de toutes les lignes.
+     * Obtenir le score de toutes les lignes.
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @return
@@ -358,7 +358,7 @@ public class Data {
     }
 
     /**
-     * Etant donne l'indice de colonne, obtenir le score de cette colonne
+     * Étant donne l'indice de colonne, obtenir le score de cette colonne
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @param col
@@ -432,7 +432,7 @@ public class Data {
     }
 
     /**
-     * obtenir le score de toutes les colonnes.
+     * Obtenir le score de toutes les colonnes.
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @return
@@ -446,7 +446,7 @@ public class Data {
     }
 
     /**
-     * obtenir le score de diagonal inferieur
+     * Obtenir le score de diagonal inférieur
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @return
@@ -519,7 +519,7 @@ public class Data {
     }
 
     /**
-     * obtenir le score de diagonal superieur
+     * Obtenir le score de diagonal supérieur
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @return
@@ -592,7 +592,7 @@ public class Data {
     }
 
     /**
-     * obtenir le score de toutes les lignes, colonnes et diagonaux.
+     * Obtenir le score de toutes les lignes, colonnes et diagonaux.
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @return
@@ -610,7 +610,7 @@ public class Data {
     }
 
     /**
-     * obtenir les positions où il n'y a pas de piece.
+     * Obtenir les positions où il n'y a pas de pièce.
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @return
@@ -629,7 +629,7 @@ public class Data {
     }
 
     /**
-     * obtenir les pieces disponibles
+     * Obtenir les pièces disponibles
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @return
@@ -644,7 +644,7 @@ public class Data {
     }
 
     /**
-     * selectionner une piece
+     * Sélectionner une pièce
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @param p
@@ -654,7 +654,7 @@ public class Data {
     }
 
     /**
-     * poser une piece
+     * Poser une pièce
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @param p
@@ -666,7 +666,7 @@ public class Data {
     }
 
     /**
-     * deposer une piece
+     * Déposer une pièce
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @param pos
@@ -680,7 +680,7 @@ public class Data {
 
 
     /**
-     * deselectionner une piece
+     * Désélectionner une pièce
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @param p
@@ -690,7 +690,7 @@ public class Data {
     }
 
     /**
-     * obtenir la piece selectionnee
+     * Obtenir la pièce sélectionnée
      * @author Jincheng KE, Yi Qin
      * @since 2022
      * @return
@@ -707,7 +707,7 @@ public class Data {
     }
 
     /**
-     * Obtenir le profondeur dynamique selon le nombre des positions disponibles.
+     * Obtenir la profondeur dynamique selon le nombre des positions disponibles.
      * author Jincheng KE, Yi Qin
      * @since 2022
      * @return
@@ -715,7 +715,7 @@ public class Data {
     public int dynamicDepth(){
         int n = 16 - compteur + rd; //C'est le nombre des positions disponibles.
         if(n>1)
-            return (int)(0.5 * ( Math.log(MAXCALCUL)/Math.log(n) + 1 )); //Selon le formule de complexite. Veuillez consulter le rapport.
-        return 16; //Comme il y a 16 case dans le plateau, tout profondeur > 16 est equivalent au profondeur 16.
+            return (int)(0.5 * ( Math.log(MAXCALCUL)/Math.log(n) + 1 )); //Selon la formule de complexité. Veuillez consulter le rapport.
+        return 16; //Comme il y a 16 cases dans le plateau, toute profondeur > 16 est équivalente aux profondeurs 16.
     }
 }

@@ -454,7 +454,6 @@ public class GameScreenVsAI implements Screen {
 
                     pieceActor[i].mettre_au_plateau(pos.getX(),pos.getY());
                     this.indice_piece_sur_case_de_plateau[pos.getX()][pos.getY()] = i;
-
                     if(this.data.getGameStatus()==0) {
                         newAI.put(i,pos);
                         int piece1 = newAI.getPiece();
