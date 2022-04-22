@@ -25,6 +25,7 @@ import com.mygdx.game.*;
 
 /**
  * La classe sert a l'affichage de la partie contre l'ordinateur / l'AI
+ * Modification en 2022 pour amelioration.
  */
 public class GameScreenVsAI implements Screen {
     private MainGame game;
@@ -54,11 +55,11 @@ public class GameScreenVsAI implements Screen {
     private Button quit;
     private Button settings;
 
-    private Button eazy;
-    private Button moderate;
-    private Button difficult;
+    private Button eazy; //bouton de niveau facile
+    private Button moderate;//bouton de niveau moyen
+    private Button difficult;//bouton de niveau difficile
 
-    private Button veryDifficult;
+    private Button veryDifficult;//bouton de niveau tres difficile
     private int difficulty;
 
     private Backup oldBackup;
@@ -194,12 +195,6 @@ public class GameScreenVsAI implements Screen {
         veryDifficult.setVisible(false);
 
         difficulty = data.difficulty;
-        /*if(difficulty==0)//eazy
-            eazy.setVisible(true);
-        if(difficulty==1)//moderate
-            moderate.setVisible(true);
-        if(difficulty==2)//difficult
-            difficult.setVisible(true);*/
 
         this.label = new Label("", this.style);
         this.label.setFontScale(this.taille.parametre_taille_label);
@@ -250,6 +245,7 @@ public class GameScreenVsAI implements Screen {
 
     /**
      * Cette methode sert a afficher tous les elements d'une partie en contre l'ordinateur et à jouer tous les sons nécessaires
+     * modification en 2022 pour l'amelioration
      * @param delta
      * @see Backup
      * @see Backup#Backup()
@@ -283,7 +279,8 @@ public class GameScreenVsAI implements Screen {
         compter--; //buffer avant de pouvoir interagir avec la fenetre
 
 
-        //System.out.println(compter);
+        //code en 2022
+        //pour changer la difficulete de jeu
         switch (difficulty){
             case 0:
                 eazy.setVisible(true);
@@ -357,6 +354,9 @@ public class GameScreenVsAI implements Screen {
                 data.toBackup().writeData("1");
                 oldBackup = data.toBackup();
             }
+
+            //code 2022
+            //gestion de bouton de difficulte
             if((Gdx.input.isTouched())&&(eazy.isClicked(x,y))&&(compter<0)){ //si partie pas finie, cliquer sur bouton de eazy = moderate
                 difficulty = 1;
                 data.difficulty = 1;
@@ -367,12 +367,12 @@ public class GameScreenVsAI implements Screen {
                 data.difficulty = 2;
                 compter = compterMAX;
             }
-            if((Gdx.input.isTouched())&&(difficult.isClicked(x,y))&&(compter<0)){ //si partie pas finie, cliquer sur bouton de difficult = eazy
+            if((Gdx.input.isTouched())&&(difficult.isClicked(x,y))&&(compter<0)){ //si partie pas finie, cliquer sur bouton de difficult = very difficult
                 difficulty = 3;
                 data.difficulty = 3;
                 compter = compterMAX;
             }
-            if((Gdx.input.isTouched())&&(veryDifficult.isClicked(x,y))&&(compter<0)){ //si partie pas finie, cliquer sur bouton de difficult = eazy
+            if((Gdx.input.isTouched())&&(veryDifficult.isClicked(x,y))&&(compter<0)){ //si partie pas finie, cliquer sur bouton de very difficult = eazy
                 difficulty = 0;
                 data.difficulty = 0;
                 compter = compterMAX;
@@ -435,8 +435,11 @@ public class GameScreenVsAI implements Screen {
                     }
                 }
                 else{
+                    //code en 2022
+                    //objectivation de la classe NewAI
                     NewAI newAI = new NewAI(Math.min(this.niveau,(this.data.compteur+1)/2),this.data);
                     Coordinate pos = newAI.getPosition(i);
+                    //ancien code de l'année 2021
                     //AI ia = new AI(Math.min(this.niveau,(this.data.compteur+1)/2),this.data).intelligence();
                     //Vector<Combination> option = ia.options; //vecteur des coups possibles pour l'IA
                     //int n0 = (int)(Math.random()*option.size());
@@ -448,9 +451,8 @@ public class GameScreenVsAI implements Screen {
                         pos = ia.getPositionsFree().elementAt(0); // donnera une piece parmi celles restantes
                     }*/
 
-                    //System.out.println("piece = "+i);
+
                     pieceActor[i].mettre_au_plateau(pos.getX(),pos.getY());
-                    //System.out.println("OK");
                     this.indice_piece_sur_case_de_plateau[pos.getX()][pos.getY()] = i;
 
                     if(this.data.getGameStatus()==0) {
