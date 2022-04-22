@@ -706,10 +706,16 @@ public class Data {
         return  -1;
     }
 
-    public int DynamicDepth(){
-        int n = 16 - compteur + rd;
+    /**
+     * Obtenir le profondeur dynamique selon le nombre des positions disponibles.
+     * author Jincheng KE, Yi Qin
+     * @since 2022
+     * @return
+     */
+    public int dynamicDepth(){
+        int n = 16 - compteur + rd; //C'est le nombre des positions disponibles.
         if(n>1)
-            return (int)(0.5 * ( Math.log(MAXCALCUL)/Math.log(n) + 1 ));
-        return 16;
+            return (int)(0.5 * ( Math.log(MAXCALCUL)/Math.log(n) + 1 )); //Selon le formule de complexite. Veuillez consulter le rapport.
+        return 16; //Comme il y a 16 case dans le plateau, tout profondeur > 16 est equivalent au profondeur 16.
     }
 }
