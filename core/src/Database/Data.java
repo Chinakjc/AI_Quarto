@@ -18,8 +18,9 @@ public class Data {
     public String[] liste_joueur;
 
     public int difficulty;
-
+    private int rd;
     private final int MAXSCORE = 10000;
+    private final int MAXCALCUL = (int)10e6;
 
     public Data(int mode){
         this.mode = mode;
@@ -33,7 +34,8 @@ public class Data {
             liste_joueur[0] = "Joueur 1";
             liste_joueur[1] = "Joueur 2";
         }
-        compteur = (int)(Math.random()*2.0);
+        rd = (int)(Math.random()*2.0);
+        compteur = rd;
         int indice_piece = 0;
         for (int blanche = 0; blanche < 2; blanche++) {
             for (int ronde = 0; ronde < 2; ronde++) {
@@ -702,5 +704,12 @@ public class Data {
             res++;
         }
         return  -1;
+    }
+
+    public int DynamicDepth(){
+        int n = 16 - compteur + rd;
+        if(n>1)
+            return (int)(0.5 * ( Math.log(MAXCALCUL)/Math.log(n) + 1 ));
+        return 16;
     }
 }

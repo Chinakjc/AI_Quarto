@@ -15,7 +15,9 @@ public class NewAI {
     private Data data;
     private int depth;
 
-    private final int MINSCORE = 0;
+    private Integer betterPiece;
+
+    private final int MINSCORE = 4;
 
     /**
      * Constructeur de cette classe
@@ -27,6 +29,7 @@ public class NewAI {
     public NewAI(int depth,Data data){
         this.data = new Data(data);
         this.depth = depth;
+        this.betterPiece = null;
     }
 
     /**
@@ -163,9 +166,11 @@ public class NewAI {
             int s = 0;
             if(getGameStatus()==1) //gagne  // alpha-beta
                 return pos;
+            Integer temp = null;
             if(getGameStatus()==0) { //jeu pas fini
                 NewAI newAI = new NewAI(depth -1,data);
                 int piece1 = newAI.getPiece();
+                temp = piece1;
                 select(piece1);
                 newAI.select(piece1);
                 Coordinate pos1 = newAI.getPosition(piece1);
@@ -180,12 +185,14 @@ public class NewAI {
                 score = s;
 
             }else{
-                if(s<MINSCORE){ //alpha-beta
+                if(s<=MINSCORE){ //alpha-beta
+                    betterPiece = temp;
                     return pos;
                 }
                 if(s<score){  //MIN
                     res = pos;
                     score = s;
+                    betterPiece = temp;
                 }
             }
         }
@@ -210,6 +217,11 @@ public class NewAI {
      * @return
      */
     public int getPiece(){
+        if(betterPiece != null){
+            int p = betterPiece;
+            betterPiece = null;
+            return p;
+        }
         ArrayList<Integer> options = getPiecesDisponibles();
         if(depth<=0){
             return options.get(0);
@@ -233,7 +245,7 @@ public class NewAI {
             }
             unPut(pos);
             unSelect(p);
-            if(score < MINSCORE)  // alpha-beta
+            if(score <= MINSCORE)  // alpha-beta
                 return p;
         }
         return res;

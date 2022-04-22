@@ -301,14 +301,14 @@ public class GameScreenVsAI implements Screen {
                 moderate.setVisible(false);
                 difficult.setVisible(true);
                 veryDifficult.setVisible(false);
-                niveau = 4;
+                niveau = 5;
                 break;
             default:
                 eazy.setVisible(false);
                 moderate.setVisible(false);
                 difficult.setVisible(false);
                 veryDifficult.setVisible(true);
-                niveau = 9;
+                niveau = 16;
                 break;
         }
 
@@ -437,7 +437,7 @@ public class GameScreenVsAI implements Screen {
                 else{
                     //code en 2022
                     //objectivation de la classe NewAI
-                    NewAI newAI = new NewAI(Math.min(this.niveau,(this.data.compteur+1)/2),this.data);
+                    NewAI newAI = new NewAI(Math.min(this.niveau,(this.data.DynamicDepth())),this.data);
                     Coordinate pos = newAI.getPosition(i);
                     //ancien code de l'année 2021
                     //AI ia = new AI(Math.min(this.niveau,(this.data.compteur+1)/2),this.data).intelligence();
