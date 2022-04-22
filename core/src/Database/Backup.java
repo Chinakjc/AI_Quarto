@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 
 /**
  * La classe est une classe intermediaire entre le fichier de sauvegarde et la classe Data
+ * modification en 2022 pour l'amelioration
  */
 public class Backup {
     int mode;
@@ -18,7 +19,7 @@ public class Backup {
                      //select 1 bit, piece dispo 1bit, position 4bits (2 bits pour lignes et 2 bits pour colonnes)
                     //donc on peut utiliser un nombre de 2 bit de base 16. Donc une chaine de caractere comme "EF"
 
-    int difficulty;
+    int difficulty;//nouvel attribut ajoute en 2022 pour le sauvgarde de difficulete de jeu.
 
     public Backup(int mode,String player1,String player2,int compteur,String[] infoPieces, int difficulty){
         this.mode = mode;
